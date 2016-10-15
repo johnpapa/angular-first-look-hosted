@@ -50,18 +50,12 @@ import { Character, CharacterService } from './character.service';
 })
 export class CharacterListComponent implements OnInit {
   characters: Character[] = [];
-  messages: string[] = [];
   selectedCharacter: Character;
 
   constructor(private characterService: CharacterService) { }
 
-  clear() {
+  clearSelection() {
     this.selectedCharacter = null;
-  }
-
-  log(msg: string) {
-    this.messages.splice(0, 0, msg);
-    console.log(msg);
   }
 
   ngOnInit() {
@@ -89,14 +83,13 @@ import { Character } from './character.service';
 })
 export class CharacterComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy {
   @Input() character: Character;
-  @Output() onLifecycleHookFire = new EventEmitter<string>();
 
   ngAfterViewInit() {
-    this.onLifecycleHookFire.emit(`ngAfterViewInit for ${this.character.name}`);
+    console.log(`ngAfterViewInit for ${this.character.name}`);
   }
 
   ngOnChanges() {
-    this.onLifecycleHookFire.emit(`ngOnChanges for ${this.character.name}`);
+    console.log(`ngOnChanges for ${this.character.name}`);
   }
 
   ngOnDestroy() {
@@ -104,7 +97,7 @@ export class CharacterComponent implements OnChanges, OnInit, AfterViewInit, OnD
   }
 
   ngOnInit() {
-    this.onLifecycleHookFire.emit(`ngOnInit for ${this.character.name}`);
+    console.log(`ngOnInit for ${this.character.name}`);
   }
 }
 
@@ -301,13 +294,9 @@ can be found in the LICENSE file at http://bit.ly/l1cense
   </li>
 </ul>
 
-<button (click)=&quot;clear()&quot;>clear</button>
-<ul class=&quot;messages&quot;>
-  <li *ngFor=&quot;let msg of messages&quot;>{{msg}}</li>
-</ul>
+<button (click)=&quot;clearSelection()&quot;>clear selection</button>
 
 <my-character *ngIf=&quot;selectedCharacter&quot;
-  (onLifecycleHookFire)=&quot;log($event)&quot;
   [character]=&quot;selectedCharacter&quot;
   ></my-character>
 
@@ -540,7 +529,7 @@ Component Lifecycle Hooks"><input type="hidden" name="files[systemjs.config.js]"
       'rxjs':                       'npm:rxjs',
       'angular-in-memory-web-api':  'npm:angular-in-memory-web-api',
       'ts':                         'npm:plugin-typescript@4.0.10/lib/plugin.js',
-      'typescript':                 'npm:typescript@2.0.2/lib/typescript.js',
+      'typescript':                 'npm:typescript@2.0.3/lib/typescript.js',
 
     },
     // packages tells the System loader how to load when no filename and/or no extension

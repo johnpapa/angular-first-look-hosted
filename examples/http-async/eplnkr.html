@@ -41,13 +41,14 @@ Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that
 can be found in the LICENSE file at http://bit.ly/l1cense
 */"><input type="hidden" name="entries[app/app.module.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/rxjs-extensions.ts][content]" value="import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/delay';
+// import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/finally';
+// import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/fromPromise';
+// import 'rxjs/add/operator/toPromise';
+// import 'rxjs/add/observable/of';
+// import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/observable/throw';
 
 
 /*
@@ -134,7 +135,8 @@ export class VehicleService {
 
   private handleError(error: Response) {
     console.error(error);
-    return Observable.throw(error.json().error || 'Server error');
+    let msg = `Error status code ${error.status} at ${error.url}`;
+    return Observable.throw(msg);
   }
 }
 
@@ -547,7 +549,7 @@ Http with Async Pipe"><input type="hidden" name="entries[README.md][encoding]" v
       'rxjs':                       'npm:rxjs',
       'angular-in-memory-web-api':  'npm:angular-in-memory-web-api',
       'ts':                         'npm:plugin-typescript@4.0.10/lib/plugin.js',
-      'typescript':                 'npm:typescript@2.0.2/lib/typescript.js',
+      'typescript':                 'npm:typescript@2.0.3/lib/typescript.js',
 
     },
     // packages tells the System loader how to load when no filename and/or no extension
