@@ -19,6 +19,7 @@ can be found in the LICENSE file at http://bit.ly/l1cense
 */"><input type="hidden" name="entries[app/app.component.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/app.module.ts][content]" value="import { NgModule } from '@angular/core';
 import { BrowserModule  } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import './rxjs-extensions';
 
@@ -30,7 +31,7 @@ import { VehicleComponent } from './vehicles/vehicle.component';
 import { VehicleService } from './vehicles/vehicle.service';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule],
+  imports: [BrowserModule, FormsModule, HttpModule],
   declarations: [
     AppComponent,
     CharacterListComponent,
@@ -67,10 +68,10 @@ import { Character, CharacterService } from './character.service';
 export class CharacterListComponent implements OnInit {
   characters: Observable<Character[]>;
 
-  constructor(private _characterService: CharacterService) { }
+  constructor(private characterService: CharacterService) { }
 
   ngOnInit() {
-    this.characters = this._characterService.getCharacters();
+    this.characters = this.characterService.getCharacters();
   }
 }
 

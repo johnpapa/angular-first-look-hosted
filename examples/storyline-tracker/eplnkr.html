@@ -211,7 +211,7 @@ Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that
 can be found in the LICENSE file at http://bit.ly/l1cense
 */"><input type="hidden" name="entries[app/admin/admin.module.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/app-routing.module.ts][content]" value="import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { PreloadAllModules, Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard, CanDeactivateGuard, UserProfileService } from './core';
 import { PageNotFoundComponent } from './page-not-found.component';
@@ -241,7 +241,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule],
   providers: [
     AuthGuard,
@@ -277,9 +277,9 @@ import { HttpModule } from '@angular/http';
 
 import './core/rxjs-extensions';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api/in-memory-web-api.module';
 import { InMemoryStoreService } from '../api/in-memory-store.service';
-import { AppRoutingModule } from './app-routing.module';
 import { CharacterService } from './models';
 import { PageNotFoundComponent } from './page-not-found.component';
 
