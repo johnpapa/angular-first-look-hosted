@@ -178,7 +178,7 @@ span.name {
   padding-left:5px;
 }
 
-.dark .dark-bottom {
+.md-toolbar.dark.dark-bottom {
   bottom: 0;
   top: inherit;
 }
