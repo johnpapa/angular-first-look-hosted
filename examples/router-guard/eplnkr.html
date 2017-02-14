@@ -1,4 +1,4 @@
-<html lang="en"><head></head><body><form id="mainForm" method="post" action="https://embed.plnkr.co?show=preview" target="eplnkr"><input type="hidden" name="entries[app/app-routing.module.ts][content]" value="import { NgModule } from '@angular/core';
+<html lang="en"><head></head><body><form id="mainForm" method="post" action="https://embed.plnkr.co?show=preview"><input type="hidden" name="entries[app/app-routing.module.ts][content]" value="import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { CharactersComponent } from './characters/characters.component';
@@ -57,7 +57,7 @@ can be found in the LICENSE file at http://bit.ly/l1cense
 @Component({
   moduleId: module.id,
   selector: 'story-app',
-  templateUrl: 'app.component.html',
+   templateUrl: './app.component.html',
   styles: [`
     nav ul {list-style-type: none;}
     nav ul li {padding: 4px;cursor: pointer;display:inline-block}
@@ -146,7 +146,7 @@ import { Character, CharacterService } from './character.service';
 @Component({
   moduleId: module.id,
   selector: 'story-characters',
-  templateUrl: 'character-list.component.html',
+   templateUrl: './character-list.component.html',
   styles: [`
     .characters {list-style-type: none;}
     *.characters li {padding: 4px;cursor: pointer;}
@@ -176,7 +176,7 @@ import { UserProfileService } from '../login/user-profile.service';
 @Component({
   moduleId: module.id,
   selector: 'story-character',
-  templateUrl: 'character.component.html'
+   templateUrl: './character.component.html'
 })
 export class CharacterComponent implements OnInit {
   @Input() character: Character;
@@ -296,7 +296,7 @@ import { UserProfileService } from './user-profile.service';
 
 @Component({
   moduleId: module.id,
-  templateUrl: 'login.component.html',
+   templateUrl: './login.component.html',
   providers: [LoginService]
 })
 export class LoginComponent implements OnDestroy {
@@ -426,7 +426,7 @@ import { Vehicle, VehicleService } from './vehicle.service';
 @Component({
   moduleId: module.id,
   selector: 'story-vehicles',
-  templateUrl: 'vehicle-list.component.html',
+   templateUrl: './vehicle-list.component.html',
   styles: [`
     .vehicles {list-style-type: none;}
     *.vehicles li {padding: 4px;cursor: pointer;}
@@ -457,7 +457,7 @@ import { Vehicle, VehicleService } from './vehicle.service';
 @Component({
   moduleId: module.id,
   selector: 'story-vehicle',
-  templateUrl: 'vehicle.component.html'
+   templateUrl: './vehicle.component.html'
 })
 export class VehicleComponent implements OnInit {
   @Input() vehicle: Vehicle;
@@ -821,12 +821,12 @@ can be found in the LICENSE file at http://bit.ly/l1cense
 </head>
 
 <body>
-  <story-app>Loading Storyline Tracker ...</story-app>
+  <story-app>Loading  ...</story-app>
 
   <script src=&quot;https://npmcdn.com/core-js/client/shim.min.js&quot;></script>
-  <script src=&quot;https://npmcdn.com/zone.js@0.6.25?main=browser&quot;></script>
-  <script src=&quot;https://npmcdn.com/reflect-metadata@0.1.8&quot;></script>
-  <script src=&quot;https://npmcdn.com/systemjs@0.19.39/dist/system.src.js&quot;></script>
+  <script src=&quot;https://npmcdn.com/zone.js@0.6.26?main=browser&quot;></script>
+
+  <script src=&quot;https://npmcdn.com/systemjs@0.19.40/dist/system.src.js&quot;></script>
 
   <script>
     System.import('systemjs.config.js')
@@ -1055,15 +1055,15 @@ Use of this source code is governed by an MIT-style license that
 can be found in the LICENSE file at http://bit.ly/l1cense
 */"><input type="hidden" name="entries[systemjs.config.js][encoding]" value="utf8"><input type="hidden" name="entries[tsconfig.json][content]" value="{
   &quot;compilerOptions&quot;: {
-    &quot;target&quot;: &quot;es5&quot;,
-    &quot;module&quot;: &quot;commonjs&quot;,
-    &quot;moduleResolution&quot;: &quot;node&quot;,
-    &quot;sourceMap&quot;: true,
     &quot;emitDecoratorMetadata&quot;: true,
     &quot;experimentalDecorators&quot;: true,
-    &quot;removeComments&quot;: false,
+    &quot;module&quot;: &quot;commonjs&quot;,
+    &quot;moduleResolution&quot;: &quot;node&quot;,
     &quot;noImplicitAny&quot;: false,
-    &quot;suppressImplicitAnyIndexErrors&quot;: true
+    &quot;removeComments&quot;: false,
+    &quot;sourceMap&quot;: true,
+    &quot;suppressImplicitAnyIndexErrors&quot;: true,
+    &quot;target&quot;: &quot;es5&quot;
   }
 }
 "><input type="hidden" name="entries[tsconfig.json][encoding]" value="utf8"></form><script>document.getElementById("mainForm").submit();</script></body></html>
