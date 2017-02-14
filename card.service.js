@@ -15,81 +15,81 @@
     var cards = [
       {
         id: 0,
-        title: 'Angular 2 Storyline Tracker',
+        title: 'Angular v2 Storyline Tracker',
         example: 'storyline-tracker/' + demoFile,
         summary: 'Example of all of the concepts put together in an application.'
       },
       {
         id: 1,
-        title: 'A1 - A2: Angular 1 Controller',
+        title: 'A1 - A2: AngularJS 1 Controller',
         example: 'a1-a2/a1/controller/' + demoFile,
-        summary: 'Simple example of an Angular 1 Controller.'
+        summary: 'Simple example of an AngularJS 1 Controller.'
       },
       {
         id: 2,
-        title: 'A1 - A2: Angular 2 Component',
+        title: 'A1 - A2: Angular v2 Component',
         example: 'a1-a2/a2/component/' + demoFile,
-        summary: 'Simple example of an Angular 2 Component.'
+        summary: 'Simple example of an Angular v2 Component.'
       },
       {
         id: 3,
-        title: 'A1 - A2: Angular 1 Structural Directives',
+        title: 'A1 - A2: AngularJS 1 Structural Directives',
         example: 'a1-a2/a1/structural-directives/' + demoFile,
-        summary: 'Simple example of an Angular 1 Structural Directive.'
+        summary: 'Simple example of an AngularJS 1 Structural Directive.'
       },
       {
         id: 4,
-        title: 'A1 - A2: Angular 2 Structural Directives',
+        title: 'A1 - A2: Angular v2 Structural Directives',
         example: 'a1-a2/a2/structural-directives/' + demoFile,
-        summary: 'Simple example of an Angular 2 Structural Directive.'
+        summary: 'Simple example of an Angular v2 Structural Directive.'
       },
       {
         id: 5,
-        title: 'A1 - A2: Angular 1 Two-Way Data Binding',
+        title: 'A1 - A2: AngularJS 1 Two-Way Data Binding',
         example: 'a1-a2/a1/2-way/' + demoFile,
-        summary: 'Simple example of Angular 1 Two-Way Data Binding.'
+        summary: 'Simple example of AngularJS 1 Two-Way Data Binding.'
       },
       {
         id: 6,
-        title: 'A1 - A2: Angular 2 Two-Way Data Binding',
+        title: 'A1 - A2: Angular v2 Two-Way Data Binding',
         example: 'a1-a2/a2/2-way/' + demoFile,
-        summary: 'Simple example of Angular 2 Two-Way Data Binding.'
+        summary: 'Simple example of Angular v2 Two-Way Data Binding.'
       },
       {
         id: 7,
-        title: 'A1 - A2: Angular 1 Property Binding',
+        title: 'A1 - A2: AngularJS 1 Property Binding',
         example: 'a1-a2/a1/property-binding/' + demoFile,
-        summary: 'Simple example of Angular 1 Property Binding.'
+        summary: 'Simple example of AngularJS 1 Property Binding.'
       },
       {
         id: 8,
-        title: 'A1 - A2: Angular 2 Property Binding',
+        title: 'A1 - A2: Angular v2 Property Binding',
         example: 'a1-a2/a2/property-binding/' + demoFile,
-        summary: 'Simple example of Angular 2 Property Binding.'
+        summary: 'Simple example of Angular v2 Property Binding.'
       },
       {
         id: 9,
-        title: 'A1 - A2: Angular 1 Event Binding',
+        title: 'A1 - A2: AngularJS 1 Event Binding',
         example: 'a1-a2/a1/binding-events/' + demoFile,
-        summary: 'Simple example of Angular 1 Event Binding.'
+        summary: 'Simple example of AngularJS 1 Event Binding.'
       },
       {
         id: 10,
-        title: 'A1 - A2: Angular 2 Event Binding',
+        title: 'A1 - A2: Angular v2 Event Binding',
         example: 'a1-a2/a2/binding-events/' + demoFile,
-        summary: 'Simple example of Angular 2 Event Binding.'
+        summary: 'Simple example of Angular v2 Event Binding.'
       },
       {
         id: 11,
-        title: 'A1 - A2: Angular 1 Services and DI',
+        title: 'A1 - A2: AngularJS 1 Services and DI',
         example: 'a1-a2/a1/services/' + demoFile,
-        summary: 'Simple example of Angular 1 Services and DI.'
+        summary: 'Simple example of AngularJS 1 Services and DI.'
       },
       {
         id: 12,
-        title: 'A1 - A2: Angular 2 Services and DI',
+        title: 'A1 - A2: Angular v2 Services and DI',
         example: 'a1-a2/a2/services/' + demoFile,
-        summary: 'Simple example of Angular 2 Services and DI.'
+        summary: 'Simple example of Angular v2 Services and DI.'
       },
       {
         id: 13,
