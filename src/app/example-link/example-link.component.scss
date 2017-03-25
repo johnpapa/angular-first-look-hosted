@@ -1,0 +1,17 @@
+@import 'mixins';
+
+.card-title {
+  padding:1em 1em 1em 0;
+}
+.card-header {
+  height: 3em;
+  margin: 1em -24px;
+}
+
+.card-header {
+  @include header-style;
+}
+
+md-card {
+  margin: 8px !important;
+}
