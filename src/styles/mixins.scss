@@ -1,0 +1,9 @@
+@import 'theme';
+
+@mixin header-style {
+  $background-color: map-get($warn, 800);
+  $font-color: map-get(map-get($warn, contrast), 800);
+
+  background: $background-color !important;
+  color: $font-color;
+}
