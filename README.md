@@ -4,10 +4,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Code from Pluralsight Course "Angular First Look"
 
-Updated for Angular v4.0.0
+Updated for Angular v4.3.0
 
 Source code for plunkers is located https://github.com/johnpapa/angular-first-look-examples
-## Development server
+
+## Development Server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
