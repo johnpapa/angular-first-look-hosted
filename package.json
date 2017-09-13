@@ -9,7 +9,6 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-
     "plunk": "gulp build-plunkers",
     "add-bp": "gulp add-example-boilerplate",
     "rm-bp": "gulp remove-example-boilerplate",
@@ -50,7 +49,6 @@
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.2.0",
-
     "archiver": "^1.0.0",
     "assert-plus": "^1.0.0",
     "bootstrap": "3.3.6",
