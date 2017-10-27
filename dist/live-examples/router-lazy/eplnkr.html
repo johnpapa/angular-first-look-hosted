@@ -1,0 +1,1093 @@
+<html lang="en"><head></head><body><form id="mainForm" method="post" action="https://embed.plnkr.co?show=preview"><input type="hidden" name="entries[app/app-routing.module.ts][content]" value="import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { PageNotFoundComponent } from './page-not-found.component';
+
+const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: '/characters' },
+  { path: 'vehicles', loadChildren: 'app/vehicles/vehicles.module#VehiclesModule' },
+  { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+export const routableComponents = [PageNotFoundComponent];
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[app/app-routing.module.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/app.component.ts][content]" value="import { Component } from '@angular/core';
+
+@Component({
+  moduleId: module.id,
+  selector: 'story-app',
+   templateUrl: './app.component.html',
+  styles: [`
+    nav ul {list-style-type: none;}
+    nav ul li {padding: 4px;cursor: pointer;display:inline-block}
+  `]
+})
+export class AppComponent { }
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[app/app.component.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/app.module.ts][content]" value="import { NgModule } from '@angular/core';
+import { BrowserModule  } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import './rxjs-extensions';
+
+import { AppComponent } from './app.component';
+import { CharactersModule } from './characters/characters.module';
+import { AppRoutingModule, routableComponents } from './app-routing.module';
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+
+    CharactersModule,
+    AppRoutingModule,
+  ],
+  declarations: [AppComponent, routableComponents],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[app/app.module.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/characters/character-list.component.ts][content]" value="import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
+import { Character, CharacterService } from './character.service';
+
+@Component({
+  moduleId: module.id,
+  selector: 'story-characters',
+   templateUrl: './character-list.component.html',
+  styles: [`
+    .characters {list-style-type: none;}
+    *.characters li {padding: 4px;cursor: pointer;}
+  `]
+})
+export class CharacterListComponent implements OnInit {
+  characters: Observable<Character[]>;
+
+  constructor(private characterService: CharacterService) { }
+
+  ngOnInit() {
+    this.characters = this.characterService.getCharacters();
+  }
+}
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[app/characters/character-list.component.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/characters/character.component.ts][content]" value="import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { Character, CharacterService } from '../characters/character.service';
+
+@Component({
+  moduleId: module.id,
+  selector: 'story-character',
+   templateUrl: './character.component.html'
+})
+export class CharacterComponent implements OnInit {
+  @Input() character: Character;
+
+  private id: any;
+
+  constructor(
+    private characterService: CharacterService,
+    private route: ActivatedRoute,
+    private router: Router) { }
+
+  ngOnInit() {
+    if (!this.character) {
+      this.route
+        .params
+        .map(params => params['id'])
+        .do(id => this.id = +id)
+        .subscribe(id => this.getCharacter());
+    }
+  }
+
+  private getCharacter() {
+    this.characterService.getCharacter(this.id)
+      .subscribe(character => this.setEditCharacter(character));
+  }
+
+  private gotoCharacters() {
+    let route = ['/characters'];
+    this.router.navigate(route);
+  }
+
+  private setEditCharacter(character: Character) {
+    if (character) {
+      this.character = character;
+    } else {
+      this.gotoCharacters();
+    }
+  }
+}
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[app/characters/character.component.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/characters/character.service.ts][content]" value="import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
+
+import { CONFIG } from '../config';
+
+let charactersUrl = CONFIG.baseUrls.characters;
+
+export class Character {
+  id: number;
+  name: string;
+  side: string;
+}
+
+@Injectable()
+export class CharacterService {
+  constructor(private http: Http) { }
+
+  getCharacter(id: number) {
+    return this.getCharacters()
+      .map(characters => characters.find(character => character.id === id));
+  }
+
+  getCharacters() {
+    return this.http
+      .get(charactersUrl)
+      .map((response: Response) => <Character[]>response.json().data);
+  }
+}
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[app/characters/character.service.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/characters/characters-routing.module.ts][content]" value="import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { CharacterComponent } from './character.component';
+import { CharactersComponent } from './characters.component';
+import { CharacterListComponent } from './character-list.component';
+
+const routes: Routes = [
+  // { path: '', pathMatch: 'full', redirectTo: '/characters' },
+  {
+    path: 'characters',
+    component: CharactersComponent,
+    children: [
+      { path: '', component: CharacterListComponent },
+      { path: ':id', component: CharacterComponent },
+    ]
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class CharactersRouterModule { }
+
+export const routedComponents = [
+  CharactersComponent,
+  CharacterListComponent,
+  CharacterComponent
+];
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[app/characters/characters-routing.module.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/characters/characters.component.ts][content]" value="import { Component } from '@angular/core';
+
+@Component({
+  moduleId: module.id,
+  selector: 'story-characters-root',
+  template: `
+    <router-outlet></router-outlet>
+  `
+})
+export class CharactersComponent { }
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[app/characters/characters.component.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/characters/characters.module.ts][content]" value="import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+import { CharacterService } from './character.service';
+import { CharactersRouterModule, routedComponents } from './characters-routing.module';
+
+@NgModule({
+  imports: [CommonModule, FormsModule, CharactersRouterModule],
+  declarations: [routedComponents],
+  providers: [CharacterService],
+})
+export class CharactersModule { }
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[app/characters/characters.module.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/config.ts][content]" value="export let CONFIG = {
+  baseUrls: {
+    characters: 'api/characters.json',
+    vehicles: 'api/vehicles.json'
+  }
+};
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[app/config.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/page-not-found.component.ts][content]" value="import { Component } from '@angular/core';
+
+@Component({
+  moduleId: module.id,
+  template: `
+    <article class=&quot;template animated slideInRight&quot;>
+      <h4>Inconceivable!</h4>
+      <div>I do not think this page is where you think it is.</div>
+    </article>
+  `
+})
+export class PageNotFoundComponent { }
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[app/page-not-found.component.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/rxjs-extensions.ts][content]" value="import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/delay';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/finally';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/observable/throw';
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[app/rxjs-extensions.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/vehicles/vehicle-list.component.ts][content]" value="import { Component, OnInit } from '@angular/core';
+
+import { Vehicle, VehicleService } from './vehicle.service';
+
+@Component({
+  moduleId: module.id,
+  selector: 'story-vehicles',
+   templateUrl: './vehicle-list.component.html',
+  styles: [`
+    .vehicles {list-style-type: none;}
+    *.vehicles li {padding: 4px;cursor: pointer;}
+  `]
+})
+export class VehicleListComponent implements OnInit {
+  vehicles: Vehicle[];
+
+  constructor(private vehicleService: VehicleService) { }
+
+  ngOnInit() {
+    this.vehicles = [];
+    this.vehicleService.getVehicles()
+      .subscribe(vehicles => this.vehicles = vehicles);
+  }
+}
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[app/vehicles/vehicle-list.component.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/vehicles/vehicle.component.ts][content]" value="import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { Vehicle, VehicleService } from './vehicle.service';
+
+@Component({
+  moduleId: module.id,
+  selector: 'story-vehicle',
+   templateUrl: './vehicle.component.html'
+})
+export class VehicleComponent implements OnInit {
+  @Input() vehicle: Vehicle;
+
+  private id: any;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private vehicleService: VehicleService) { }
+
+  ngOnInit() {
+    if (!this.vehicle) {
+      this.route
+        .params
+        .map(params => params['id'])
+        .do(id => this.id = +id)
+        .subscribe(id => this.getVehicle());
+    }
+  }
+
+  private getVehicle() {
+    this.vehicleService.getVehicle(this.id)
+      .subscribe((vehicle: Vehicle) => this.setEditVehicle(vehicle));
+  }
+
+  private gotoVehicles() {
+    let route = ['/vehicles'];
+    this.router.navigate(route);
+  }
+
+  private setEditVehicle(vehicle: Vehicle) {
+    if (vehicle) {
+      this.vehicle = vehicle;
+    } else {
+      this.gotoVehicles();
+    }
+  }
+}
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[app/vehicles/vehicle.component.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/vehicles/vehicle.service.ts][content]" value="import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
+
+import { CONFIG } from '../config';
+
+let vehiclesUrl = CONFIG.baseUrls.vehicles;
+
+export class Vehicle {
+  id: number;
+  name: string;
+  type: string;
+}
+
+@Injectable()
+export class VehicleService {
+  constructor(private http: Http) {
+    console.log('created vehicle service');
+  }
+
+  getVehicle(id: number) {
+    return this.getVehicles()
+      .map(vehicles => vehicles.find(vehicle => vehicle.id === id));
+  }
+
+  getVehicles() {
+    return this.http
+      .get(vehiclesUrl)
+      .map((response: Response) => <Vehicle[]>response.json().data);
+  }
+}
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[app/vehicles/vehicle.service.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/vehicles/vehicles-routing.module.ts][content]" value="import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { VehicleComponent } from './vehicle.component';
+import { VehiclesComponent } from './vehicles.component';
+import { VehicleListComponent } from './vehicle-list.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: VehiclesComponent,
+    children: [
+      { path: '', component: VehicleListComponent },
+      { path: ':id', component: VehicleComponent },
+    ]
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class VehiclesRoutingModule { }
+
+export const routedComponents = [
+  VehiclesComponent,
+  VehicleListComponent,
+  VehicleComponent
+];
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[app/vehicles/vehicles-routing.module.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/vehicles/vehicles.component.ts][content]" value="import { Component } from '@angular/core';
+
+@Component({
+  moduleId: module.id,
+  selector: 'story-vehicles-root',
+  template: `
+    <router-outlet></router-outlet>
+  `
+})
+export class VehiclesComponent { }
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[app/vehicles/vehicles.component.ts][encoding]" value="utf8"><input type="hidden" name="entries[app/vehicles/vehicles.module.ts][content]" value="import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+import { VehicleService } from './vehicle.service';
+import { routedComponents, VehiclesRoutingModule } from './vehicles-routing.module';
+
+@NgModule({
+  imports: [CommonModule, FormsModule, VehiclesRoutingModule],
+  declarations: [routedComponents],
+  providers: [VehicleService],
+})
+export class VehiclesModule { }
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[app/vehicles/vehicles.module.ts][encoding]" value="utf8"><input type="hidden" name="entries[main.ts][content]" value="import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModule } from './app/app.module';
+
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .then(success => console.log(`Bootstrap success`))
+  .catch(err => console.error(err));
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[main.ts][encoding]" value="utf8"><input type="hidden" name="entries[styles.css][content]" value="/* Master Styles */
+h1 {
+  color: #369;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 250%;
+}
+h2, h3 {
+  color: #444;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+}
+body {
+  margin: 2em;
+}
+body, input[text], button {
+  color: #888;
+  font-family: Cambria, Georgia;
+}
+a {
+  cursor: pointer;
+  cursor: hand;
+}
+button {
+  font-family: Arial;
+  background-color: #eee;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  cursor: hand;
+}
+button:hover {
+  background-color: #cfd8dc;
+}
+button:disabled {
+  background-color: #eee;
+  color: #aaa;
+  cursor: auto;
+}
+
+/* Navigation link styles */
+nav a {
+  padding: 5px 10px;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #eee;
+  border-radius: 4px;
+}
+nav a:visited, a:link {
+  color: #607D8B;
+}
+nav a:hover {
+  color: #039be5;
+  background-color: #CFD8DC;
+}
+nav a.active {
+  color: #039be5;
+}
+
+/* items class */
+.items {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 24em;
+}
+.items li {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  background-color: #EEE;
+  margin: .5em;
+  padding: .3em 0;
+  height: 1.6em;
+  border-radius: 4px;
+}
+.items li:hover {
+  color: #607D8B;
+  background-color: #DDD;
+  left: .1em;
+}
+.items li.selected:hover {
+  background-color: #BBD8DC;
+  color: white;
+}
+.items .text {
+  position: relative;
+  top: -3px;
+}
+.items {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 24em;
+}
+.items li {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  background-color: #EEE;
+  margin: .5em;
+  padding: .3em 0;
+  height: 1.6em;
+  border-radius: 4px;
+}
+.items li:hover {
+  color: #607D8B;
+  background-color: #DDD;
+  left: .1em;
+}
+.items li.selected {
+  background-color: #CFD8DC;
+  color: white;
+}
+
+.items li.selected:hover {
+  background-color: #BBD8DC;
+}
+.items .text {
+  position: relative;
+  top: -3px;
+}
+.items .badge {
+  display: inline-block;
+  font-size: small;
+  color: white;
+  padding: 0.8em 0.7em 0 0.7em;
+  background-color: #607D8B;
+  line-height: 1em;
+  position: relative;
+  left: -1px;
+  top: -4px;
+  height: 1.8em;
+  margin-right: .8em;
+  border-radius: 4px 0 0 4px;
+}
+/* everywhere else */
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[styles.css][encoding]" value="utf8"><input type="hidden" name="entries[app/app.component.html][content]" value="<div>
+  <header>
+    <h1>Storyline Tracker</h1>
+    <h3>Lazily Loaded Router Demo</h3>
+    <nav>
+      <ul>
+        <li><a [routerLink]=&quot;['/characters']&quot; href=&quot;&quot;>Characters</a></li>
+        <li><a [routerLink]=&quot;['/vehicles']&quot; href=&quot;&quot;>Vehicles</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+</div>
+
+
+<!-- 
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+-->"><input type="hidden" name="entries[app/app.component.html][encoding]" value="utf8"><input type="hidden" name="entries[app/characters/character-list.component.html][content]" value="<article>
+  <h4>My Characters</h4>
+
+  <ul class=&quot;characters&quot;>
+    <li *ngFor=&quot;let character of characters | async&quot;>
+      <a href=&quot;&quot; [routerLink]=&quot;[character.id]&quot;>
+       {{character.id}}. {{character.name}}
+      </a>
+    </li>
+  </ul>
+</article>
+
+
+<!-- 
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+-->"><input type="hidden" name="entries[app/characters/character-list.component.html][encoding]" value="utf8"><input type="hidden" name="entries[app/characters/character.component.html][content]" value="<article>
+  <div *ngIf=&quot;character&quot;>
+    <h4>{{character.name}} details</h4>
+
+    <div>
+      <label for=&quot;nametext&quot;>Name</label>
+      <input type=&quot;text&quot; id=&quot;nametext&quot; [(ngModel)]=&quot;character.name&quot; />
+    </div>
+
+    <div>
+      <label for=&quot;typetext&quot;>Side</label>
+      <input type=&quot;text&quot; id=&quot;typetext&quot; [(ngModel)]=&quot;character.side&quot; />
+    </div>
+  </div>
+</article>
+
+<!-- 
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+-->"><input type="hidden" name="entries[app/characters/character.component.html][encoding]" value="utf8"><input type="hidden" name="entries[app/vehicles/vehicle-list.component.html][content]" value="<article>
+  <h4>My Vehicles</h4>
+
+  <ul class=&quot;vehicles&quot;>
+    <li *ngFor=&quot;let vehicle of vehicles&quot;>
+      <a href=&quot;&quot; [routerLink]=&quot;[vehicle.id]&quot;>
+       {{vehicle.id}}. {{vehicle.name}}
+      </a>
+    </li>
+  </ul>
+</article>
+
+
+<!-- 
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+-->"><input type="hidden" name="entries[app/vehicles/vehicle-list.component.html][encoding]" value="utf8"><input type="hidden" name="entries[app/vehicles/vehicle.component.html][content]" value="<article>
+  <div *ngIf=&quot;vehicle&quot;>
+    <h4>{{vehicle.name}} details</h4>
+
+    <div>
+      <label for=&quot;nametext&quot;>Name</label>
+      <input type=&quot;text&quot; id=&quot;nametext&quot; [(ngModel)]=&quot;vehicle.name&quot; />
+    </div>
+
+    <div>
+      <label for=&quot;typetext&quot;>Type</label>
+      <input type=&quot;text&quot; id=&quot;typetext&quot; [(ngModel)]=&quot;vehicle.type&quot; />
+    </div>
+  </div>
+</article>
+
+<!-- 
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+-->"><input type="hidden" name="entries[app/vehicles/vehicle.component.html][encoding]" value="utf8"><input type="hidden" name="entries[index.html][content]" value="<!DOCTYPE html>
+<html>
+
+<head>
+  <script>document.write('<base href=&quot;' + document.location + '&quot; />');</script>
+
+  <meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+</head>
+
+<body>
+  <story-app>Loading  ...</story-app>
+
+  <script src=&quot;https://npmcdn.com/core-js/client/shim.min.js&quot;></script>
+  <script src=&quot;https://npmcdn.com/zone.js@0.7.4?main=browser&quot;></script>
+
+  <script src=&quot;https://npmcdn.com/systemjs@0.19.40/dist/system.src.js&quot;></script>
+
+  <script>
+    System.import('systemjs.config.js')
+      .then(function () { System.import('main') })
+      .catch(console.error.bind(console));
+  </script>
+</body>
+
+</html>
+
+
+<!-- 
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+-->"><input type="hidden" name="entries[index.html][encoding]" value="utf8"><input type="hidden" name="entries[api/characters.json][content]" value="{
+  &quot;data&quot;: [
+    {
+      &quot;id&quot;: 11,
+      &quot;name&quot;: &quot;Chewbacca&quot;,
+      &quot;side&quot;: &quot;light&quot;
+    },
+    {
+      &quot;id&quot;: 12,
+      &quot;name&quot;: &quot;Rey&quot;,
+      &quot;side&quot;: &quot;light&quot;
+    },
+    {
+      &quot;id&quot;: 13,
+      &quot;name&quot;: &quot;Finn (FN2187)&quot;,
+      &quot;side&quot;: &quot;light&quot;
+    },
+    {
+      &quot;id&quot;: 14,
+      &quot;name&quot;: &quot;Han Solo&quot;,
+      &quot;side&quot;: &quot;light&quot;
+    },
+    {
+      &quot;id&quot;: 15,
+      &quot;name&quot;: &quot;Leia Organa&quot;,
+      &quot;side&quot;: &quot;light&quot;
+    },
+    {
+      &quot;id&quot;: 16,
+      &quot;name&quot;: &quot;Luke Skywalker&quot;,
+      &quot;side&quot;: &quot;light&quot;
+    },
+    {
+      &quot;id&quot;: 17,
+      &quot;name&quot;: &quot;Poe Dameron&quot;,
+      &quot;side&quot;: &quot;light&quot;
+    },
+    {
+      &quot;id&quot;: 18,
+      &quot;name&quot;: &quot;Kylo Ren&quot;,
+      &quot;side&quot;: &quot;dark&quot;
+    },
+    {
+      &quot;id&quot;: 19,
+      &quot;name&quot;: &quot;Supreme Commander Snoke&quot;,
+      &quot;side&quot;: &quot;dark&quot;
+    },
+    {
+      &quot;id&quot;: 20,
+      &quot;name&quot;: &quot;R2-D2&quot;,
+      &quot;side&quot;: &quot;light&quot;
+    },
+    {
+      &quot;id&quot;: 21,
+      &quot;name&quot;: &quot;BB8&quot;,
+      &quot;side&quot;: &quot;light&quot;
+    },
+    {
+      &quot;id&quot;: 22,
+      &quot;name&quot;: &quot;C-3PO&quot;,
+      &quot;side&quot;: &quot;light&quot;
+    },
+    {
+      &quot;id&quot;: 23,
+      &quot;name&quot;: &quot;Maz Kanata&quot;,
+      &quot;side&quot;: &quot;light&quot;
+    },
+    {
+      &quot;id&quot;: 24,
+      &quot;name&quot;: &quot;Captain Phasma&quot;,
+      &quot;side&quot;: &quot;dark&quot;
+    },
+    {
+      &quot;id&quot;: 25,
+      &quot;name&quot;: &quot;General Hux&quot;,
+      &quot;side&quot;: &quot;dark&quot;
+    },
+    {
+      &quot;id&quot;: 26,
+      &quot;name&quot;: &quot;Lor San Tekka&quot;,
+      &quot;side&quot;: &quot;light&quot;
+    }
+  ]
+}"><input type="hidden" name="entries[api/characters.json][encoding]" value="utf8"><input type="hidden" name="entries[api/vehicles.json][content]" value="{
+  &quot;data&quot;: [
+    {
+      &quot;id&quot;: 30,
+      &quot;name&quot;: &quot;Millennium Falcon&quot;,
+      &quot;type&quot;: &quot;space&quot;
+    },
+    {
+      &quot;id&quot;: 31,
+      &quot;name&quot;: &quot;Y-Wing Fighter&quot;,
+      &quot;type&quot;: &quot;space&quot;
+    },
+    {
+      &quot;id&quot;: 32,
+      &quot;name&quot;: &quot;X-Wing Fighter&quot;,
+      &quot;type&quot;: &quot;space&quot;
+    },
+    {
+      &quot;id&quot;: 33,
+      &quot;name&quot;: &quot;Imperial Star Destroyer&quot;,
+      &quot;type&quot;: &quot;space&quot;
+    },
+    {
+      &quot;id&quot;: 34,
+      &quot;name&quot;: &quot;AT-AT Walker&quot;,
+      &quot;type&quot;: &quot;land&quot;
+    },
+    {
+      &quot;id&quot;: 35,
+      &quot;name&quot;: &quot;TIE Fighter&quot;,
+      &quot;type&quot;: &quot;space&quot;
+    },
+    {
+      &quot;id&quot;: 36,
+      &quot;name&quot;: &quot;B-Wing Fighter&quot;,
+      &quot;type&quot;: &quot;space&quot;
+    },
+    {
+      &quot;id&quot;: 37,
+      &quot;name&quot;: &quot;ETA-2 Jedi Starfighter&quot;,
+      &quot;type&quot;: &quot;space&quot;
+    },
+    {
+      &quot;id&quot;: 38,
+      &quot;name&quot;: &quot;TIE Interceptor&quot;,
+      &quot;type&quot;: &quot;space&quot;
+    },
+    {
+      &quot;id&quot;: 39,
+      &quot;name&quot;: &quot;X-34 Landspeeder&quot;,
+      &quot;type&quot;: &quot;land&quot;
+    },
+    {
+      &quot;id&quot;: 40,
+      &quot;name&quot;: &quot;Snow Speeder&quot;,
+      &quot;type&quot;: &quot;land&quot;
+    }
+  ]
+}"><input type="hidden" name="entries[api/vehicles.json][encoding]" value="utf8"><input type="hidden" name="entries[typings.d.ts][content]" value="
+
+declare var componentHandler: any;
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[typings.d.ts][encoding]" value="utf8"><input type="hidden" name="tags[0]" value="angular2"><input type="hidden" name="tags[1]" value="example"><input type="hidden" name="tags[2]" value="first look"><input type="hidden" name="tags[3]" value="Angular"><input type="hidden" name="title" value="Angular Example - Angular - Lazily Loaded Modules via Routes"><input type="hidden" name="source[type]" value="Angular - Lazily Loaded Modules via Routes"><input type="hidden" name="source[url]" value="https://angular.io"><input type="hidden" name="entries[README.md][content]" value="### Angular First Look Example 
+
+Angular - Lazily Loaded Modules via Routes"><input type="hidden" name="entries[README.md][encoding]" value="utf8"><input type="hidden" name="entries[systemjs-angular-loader.js][content]" value="var templateUrlRegex = /templateUrl\s*:(\s*['&quot;`](.*?)['&quot;`]\s*)/gm;
+var stylesRegex = /styleUrls *:(\s*\[[^\]]*?\])/g;
+var stringRegex = /(['`&quot;])((?:[^\\]\\\1|.)*?)\1/g;
+
+module.exports.translate = function(load){
+  if (load.source.indexOf('moduleId') != -1) return load;
+
+  var url = document.createElement('a');
+  url.href = load.address;
+
+  var basePathParts = url.pathname.split('/');
+
+  basePathParts.pop();
+  var basePath = basePathParts.join('/');
+
+  var baseHref = document.createElement('a');
+  baseHref.href = this.baseURL;
+  baseHref = baseHref.pathname;
+
+  if (!baseHref.startsWith('/base/')) { // it is not karma
+    basePath = basePath.replace(baseHref, '');
+  }
+
+  load.source = load.source
+    .replace(templateUrlRegex, function(match, quote, url){
+      var resolvedUrl = url;
+
+      if (url.startsWith('.')) {
+        resolvedUrl = basePath + url.substr(1);
+      }
+
+      return 'templateUrl: &quot;' + resolvedUrl + '&quot;';
+    })
+    .replace(stylesRegex, function(match, relativeUrls) {
+      var urls = [];
+
+      while ((match = stringRegex.exec(relativeUrls)) !== null) {
+        if (match[2].startsWith('.')) {
+          urls.push('&quot;' + basePath + match[2].substr(1) + '&quot;');
+        } else {
+          urls.push('&quot;' + match[2] + '&quot;');
+        }
+      }
+
+      return &quot;styleUrls: [&quot; + urls.join(', ') + &quot;]&quot;;
+    });
+
+  return load;
+};
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[systemjs-angular-loader.js][encoding]" value="utf8"><input type="hidden" name="entries[systemjs.config.js][content]" value="/**
+ * PLUNKER VERSION
+ * (based on systemjs.config.js in angular.io)
+ * System configuration for Angular samples
+ * Adjust as necessary for your application needs.
+ */
+(function(global) {
+  System.config({
+    // DEMO ONLY! REAL CODE SHOULD NOT TRANSPILE IN THE BROWSER
+    transpiler: 'ts',
+    typescriptOptions: {
+      // Copy of compiler options in standard tsconfig.json
+      target: 'es5',
+      module: 'commonjs',
+      moduleResolution: 'node',
+      sourceMap: true,
+      emitDecoratorMetadata: true,
+      experimentalDecorators: true,
+      lib: ['es2015', 'dom'],
+      noImplicitAny: true,
+      suppressImplicitAnyIndexErrors: true
+    },
+    meta: {
+      typescript: {
+        exports: 'ts'
+      }
+    },
+    paths: {
+      // paths serve as alias
+      'npm:': 'https://unpkg.com/'
+    },
+    // map tells the System loader where to look for things
+    map: {
+      // our app is within the app folder
+      app: 'app',
+      main: 'main.js', // PAPA
+
+      // angular bundles
+      '@angular/animations': 'npm:@angular/animations/bundles/animations.umd.js',
+      '@angular/animations/browser': 'npm:@angular/animations/bundles/animations-browser.umd.js',
+      '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
+      '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
+      '@angular/common/http': 'npm:@angular/common/bundles/common-http.umd.js',
+      '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
+      '@angular/platform-browser': 'npm:@angular/platform-browser/bundles/platform-browser.umd.js',
+      '@angular/platform-browser/animations':
+        'npm:@angular/platform-browser/bundles/platform-browser-animations.umd.js',
+      '@angular/platform-browser-dynamic':
+        'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
+      '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
+      '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
+      '@angular/router/upgrade': 'npm:@angular/router/bundles/router-upgrade.umd.js',
+      '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
+      '@angular/upgrade': 'npm:@angular/upgrade/bundles/upgrade.umd.js',
+      '@angular/upgrade/static': 'npm:@angular/upgrade/bundles/upgrade-static.umd.js',
+
+      // other libraries
+      rxjs: 'npm:rxjs@5.4.2',
+      tslib: 'npm:tslib/tslib.js',
+      'angular-in-memory-web-api':
+        'npm:angular-in-memory-web-api@0.4/bundles/in-memory-web-api.umd.js',
+      ts: 'npm:plugin-typescript@5.2.7/lib/plugin.js',
+      typescript: 'npm:typescript@2.3.2/lib/typescript.js'
+    },
+    // packages tells the System loader how to load when no filename and/or no extension
+    packages: {
+      'app/core': { main: 'index' }, // PAPA
+      'app/models': { main: 'index' }, // PAPA
+      api: { defaultExtension: 'js' }, //PAPA
+      app: {
+        main: './main.ts',
+        defaultExtension: 'ts',
+        meta: {
+          './*.ts': {
+            loader: 'systemjs-angular-loader.js'
+          }
+        }
+      },
+      rxjs: {
+        defaultExtension: 'js'
+      }
+    }
+  });
+})(this);
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[systemjs.config.js][encoding]" value="utf8"><input type="hidden" name="entries[tsconfig.json][content]" value="{
+  &quot;compilerOptions&quot;: {
+    &quot;emitDecoratorMetadata&quot;: true,
+    &quot;experimentalDecorators&quot;: true,
+    &quot;lib&quot;: [ &quot;es2015&quot;, &quot;dom&quot; ],
+    &quot;module&quot;: &quot;commonjs&quot;,
+    &quot;moduleResolution&quot;: &quot;node&quot;,
+    &quot;noImplicitAny&quot;: false,
+    &quot;removeComments&quot;: false,
+    &quot;sourceMap&quot;: true,
+    &quot;suppressImplicitAnyIndexErrors&quot;: true,
+    &quot;target&quot;: &quot;es5&quot;
+  }
+}
+"><input type="hidden" name="entries[tsconfig.json][encoding]" value="utf8"></form><script>document.getElementById("mainForm").submit();</script></body></html>
