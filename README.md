@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Code from Pluralsight Course "Angular First Look"
 
-Updated for Angular v4.3.0
+Updated for Angular v4.4.6
 
 Source code for plunkers is located https://github.com/johnpapa/angular-first-look-examples
 
