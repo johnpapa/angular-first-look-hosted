@@ -211,7 +211,7 @@ can be found in the LICENSE file at http://bit.ly/l1cense
 
   <script src=&quot;https://npmcdn.com/core-js/client/shim.min.js&quot;></script>
 
-  <script src=&quot;https://npmcdn.com/zone.js@0.6.26?main=browser&quot;></script>
+  <script src=&quot;https://npmcdn.com/zone.js@0.7.4?main=browser&quot;></script>
 
   <script src=&quot;https://npmcdn.com/systemjs@0.19.40/dist/system.src.js&quot;></script>
 
@@ -240,22 +240,86 @@ Use of this source code is governed by an MIT-style license that
 can be found in the LICENSE file at http://bit.ly/l1cense
 */"><input type="hidden" name="entries[typings.d.ts][encoding]" value="utf8"><input type="hidden" name="tags[0]" value="angular2"><input type="hidden" name="tags[1]" value="example"><input type="hidden" name="tags[2]" value="first look"><input type="hidden" name="tags[3]" value="Angular"><input type="hidden" name="title" value="Angular Example - Simplest Component"><input type="hidden" name="source[type]" value="Simplest Component"><input type="hidden" name="source[url]" value="https://angular.io"><input type="hidden" name="entries[README.md][content]" value="### Angular First Look Example 
 
-Simplest Component"><input type="hidden" name="entries[README.md][encoding]" value="utf8"><input type="hidden" name="entries[systemjs.config.js][content]" value="/**
+Simplest Component"><input type="hidden" name="entries[README.md][encoding]" value="utf8"><input type="hidden" name="entries[systemjs-angular-loader.js][content]" value="var templateUrlRegex = /templateUrl\s*:(\s*['&quot;`](.*?)['&quot;`]\s*)/gm;
+var stylesRegex = /styleUrls *:(\s*\[[^\]]*?\])/g;
+var stringRegex = /(['`&quot;])((?:[^\\]\\\1|.)*?)\1/g;
+
+module.exports.translate = function(load){
+  if (load.source.indexOf('moduleId') != -1) return load;
+
+  var url = document.createElement('a');
+  url.href = load.address;
+
+  var basePathParts = url.pathname.split('/');
+
+  basePathParts.pop();
+  var basePath = basePathParts.join('/');
+
+  var baseHref = document.createElement('a');
+  baseHref.href = this.baseURL;
+  baseHref = baseHref.pathname;
+
+  if (!baseHref.startsWith('/base/')) { // it is not karma
+    basePath = basePath.replace(baseHref, '');
+  }
+
+  load.source = load.source
+    .replace(templateUrlRegex, function(match, quote, url){
+      var resolvedUrl = url;
+
+      if (url.startsWith('.')) {
+        resolvedUrl = basePath + url.substr(1);
+      }
+
+      return 'templateUrl: &quot;' + resolvedUrl + '&quot;';
+    })
+    .replace(stylesRegex, function(match, relativeUrls) {
+      var urls = [];
+
+      while ((match = stringRegex.exec(relativeUrls)) !== null) {
+        if (match[2].startsWith('.')) {
+          urls.push('&quot;' + basePath + match[2].substr(1) + '&quot;');
+        } else {
+          urls.push('&quot;' + match[2] + '&quot;');
+        }
+      }
+
+      return &quot;styleUrls: [&quot; + urls.join(', ') + &quot;]&quot;;
+    });
+
+  return load;
+};
+
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/"><input type="hidden" name="entries[systemjs-angular-loader.js][encoding]" value="utf8"><input type="hidden" name="entries[systemjs.config.js][content]" value="/**
  * PLUNKER VERSION
  * (based on systemjs.config.js in angular.io)
  * System configuration for Angular samples
  * Adjust as necessary for your application needs.
  */
-(function (global) {
+(function(global) {
   System.config({
     // DEMO ONLY! REAL CODE SHOULD NOT TRANSPILE IN THE BROWSER
     transpiler: 'ts',
     typescriptOptions: {
-      tsconfig: true
+      // Copy of compiler options in standard tsconfig.json
+      target: 'es5',
+      module: 'commonjs',
+      moduleResolution: 'node',
+      sourceMap: true,
+      emitDecoratorMetadata: true,
+      experimentalDecorators: true,
+      lib: ['es2015', 'dom'],
+      noImplicitAny: true,
+      suppressImplicitAnyIndexErrors: true
     },
     meta: {
-      'typescript': {
-        &quot;exports&quot;: &quot;ts&quot;
+      typescript: {
+        exports: 'ts'
       }
     },
     paths: {
@@ -266,35 +330,48 @@ Simplest Component"><input type="hidden" name="entries[README.md][encoding]" val
     map: {
       // our app is within the app folder
       app: 'app',
-      'main':                       'main.js', // PAPA
+      main: 'main.js', // PAPA
 
       // angular bundles
+      '@angular/animations': 'npm:@angular/animations/bundles/animations.umd.js',
+      '@angular/animations/browser': 'npm:@angular/animations/bundles/animations-browser.umd.js',
       '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
       '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
+      '@angular/common/http': 'npm:@angular/common/bundles/common-http.umd.js',
       '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
       '@angular/platform-browser': 'npm:@angular/platform-browser/bundles/platform-browser.umd.js',
-      '@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
+      '@angular/platform-browser/animations':
+        'npm:@angular/platform-browser/bundles/platform-browser-animations.umd.js',
+      '@angular/platform-browser-dynamic':
+        'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
       '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
-      '@angular/common/http': 'npm:@angular/common/bundles/common-http.umd.js',
       '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
+      '@angular/router/upgrade': 'npm:@angular/router/bundles/router-upgrade.umd.js',
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
       '@angular/upgrade': 'npm:@angular/upgrade/bundles/upgrade.umd.js',
+      '@angular/upgrade/static': 'npm:@angular/upgrade/bundles/upgrade-static.umd.js',
 
       // other libraries
-      'rxjs':                      'npm:rxjs@5.0.1',
-      'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
-      'tslib':                     'npm:tslib/tslib.js',
-      'ts':                        'npm:plugin-typescript@5.2.7/lib/plugin.js',
-      'typescript':                'npm:typescript@2.2.1/lib/typescript.js'
+      rxjs: 'npm:rxjs@5.4.2',
+      tslib: 'npm:tslib/tslib.js',
+      'angular-in-memory-web-api':
+        'npm:angular-in-memory-web-api@0.4/bundles/in-memory-web-api.umd.js',
+      ts: 'npm:plugin-typescript@5.2.7/lib/plugin.js',
+      typescript: 'npm:typescript@2.3.2/lib/typescript.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
       'app/core': { main: 'index' }, // PAPA
       'app/models': { main: 'index' }, // PAPA
-      'api': { defaultExtension: 'js' }, //PAPA
+      api: { defaultExtension: 'js' }, //PAPA
       app: {
         main: './main.ts',
-        defaultExtension: 'ts'
+        defaultExtension: 'ts',
+        meta: {
+          './*.ts': {
+            loader: 'systemjs-angular-loader.js'
+          }
+        }
       },
       rxjs: {
         defaultExtension: 'js'
@@ -302,7 +379,6 @@ Simplest Component"><input type="hidden" name="entries[README.md][encoding]" val
     }
   });
 })(this);
-
 
 
 /*
