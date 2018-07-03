@@ -1,13 +1,14 @@
-<mat-card>
-  <mat-card-header color="primary" class="card-header" fxLayout="row nowrap" fxFlex fxLayoutAlign>
-    <span class="card-title" fxFlex>{{card.id}}.</span>
-    <span class="card-title" fxFlex="grow">{{card.title}}</span>
-  </mat-card-header>
 
-  <mat-card-content fxLayout="row nowrap" fxFlex fxLayoutAlign>
-    <div fxFlex="grow">{{card.summary}}</div>
-    <div fxFlex>
-      <a mat-button color="accent" mat-raised-button href="live-examples/{{card.example}}" target="_blank">View Sample</a>
-    </div>
+<mat-card>
+  <mat-card-header class="card-header">
+    <mat-card-title>{{card.id}}. {{card.title}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{card.summary}}
+    </p>
   </mat-card-content>
+  <mat-card-actions>
+    <a mat-button color="accent" mat-raised-button href="live-examples/{{card.example}}" target="_blank">View Sample</a>
+  </mat-card-actions>
 </mat-card>
