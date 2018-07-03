@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { Card } from '../models/card';
 
 @Injectable()
@@ -69,101 +68,120 @@ export class ExampleService {
       `compare/angularjs/binding-events/${this.demoFile}`,
       `Simple example of AngularJS Event Binding.`
     ),
-    new Card(10,
+    new Card(
+      10,
       'AngularJS (v1) to Angular (v2+): Angular Event Binding',
       `compare/angular/binding-events/${this.demoFile}`,
       `Simple example of Angular Event Binding.`
     ),
-    new Card(11,
+    new Card(
+      11,
       'AngularJS (v1) to Angular (v2+): AngularJS Services and DI',
       `compare/angularjs/services/${this.demoFile}`,
       `Simple example of AngularJS Services and DI.`
     ),
-    new Card(12,
+    new Card(
+      12,
       'AngularJS (v1) to Angular (v2+): Angular Services and DI',
       `compare/angular/services/${this.demoFile}`,
       `Simple example of Angular Services and DI.`
     ),
-    new Card(13,
+    new Card(
+      13,
       'Angular: Components',
       `component-simple/${this.demoFile}`,
       `A Component contains application logic that controls a region of the user interface
       that we call a view.`
     ),
-    new Card(14,
+    new Card(
+      14,
       'Angular: Nested Components',
       `component-nest/${this.demoFile}`,
       `A Component may contain other components.`
     ),
-    new Card(15,
+    new Card(
+      15,
       'Angular: Input/Output Components',
       `component-input-output/${this.demoFile}`,
       `A Component may have input properties and output events.`
     ),
-    new Card(16,
+    new Card(
+      16,
       'Angular: Data Binding and Directives',
       `data-binding/${this.demoFile}`,
       `Interpolation, Property Binding, Event Binding, Two Way Binding, and built-in Directives.`
     ),
-    new Card(17,
+    new Card(
+      17,
       'Angular: Need Services',
       `need-services/${this.demoFile}`,
       `A Service provides anything our application needs. It often shares data or functions
       between other Angular features`
     ),
-    new Card(18,
+    new Card(
+      18,
       'Angular: Services and Dependency Injection',
       `services-and-di/${this.demoFile}`,
       `Dependency Injection is how we provide an instance of a class to another Angular feature.`
     ),
-    new Card(19,
+    new Card(
+      19,
       'Angular: Component Lifecycle Hooks',
       `lifecycle/${this.demoFile}`,
       `Lifecycle Hooks allow us to tap into specific moments in the application lifecycle to perform logic.`
     ),
-    new Card(20,
+    new Card(
+      20,
       'Angular: Needs Http',
       `need-http/${this.demoFile}`,
       `Angular applications can connect with a web server to get or save data using HTTP.
       This example lacks http, whereas the next example has it.`
     ),
-    new Card(21,
+    new Card(
+      21,
       'Angular: Http',
       `http/${this.demoFile}`,
       `Angular applications can connect with a web server to get or save data using HTTP.`
     ),
-    new Card(22,
+    new Card(
+      22,
       'Angular: Http with Async Pipe',
       `http-async/${this.demoFile}`,
       `Using Http with Observables and the Async Pipe.`
     ),
-    new Card(23,
+    new Card(
+      23,
       'Angular: Http with Promises',
       `http-promise/${this.demoFile}`,
       `Using Http with promises.`
     ),
-    new Card(24,
+    new Card(
+      24,
       'Angular: Needs Router',
       `need-router/${this.demoFile}`,
       `Use this sample to practice adding a router to navigate to components.`
     ),
-    new Card(25,
+    new Card(
+      25,
       'Angular: Router',
       `router/${this.demoFile}`,
       `Routing allows our application to navigate between different Components, passing
       parameters where needed.`
     ),
-    new Card(26,
+    new Card(
+      26,
       'Angular: Route Guards',
       `router-guard/${this.demoFile}`,
       `Guard routes with logic to prevent access.`
     ),
-    new Card(27,
+    new Card(
+      27,
       'Angular: Eagerly Loading Routes',
       `router-eager/${this.demoFile}`,
       `Eagerly load routes.`
     ),
-    new Card(28,
+    new Card(
+      28,
       'Angular: Lazily Load Routes',
       `router-lazy/${this.demoFile}`,
       `Lazily load routes.`

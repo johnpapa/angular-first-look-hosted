@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 /*@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';*/
+@import 'mixin';
 
 html, body {
   font-family: 'Roboto', sans-serif;
@@ -11,7 +12,7 @@ html, body {
 
 /*Custom Styles*/
 
-md-toolbar a {
+mat-toolbar a {
   color: inherit !important;
   text-decoration: none;
 }
@@ -21,7 +22,7 @@ md-toolbar a {
   line-height: 18px;
 }
 
-md-content {
+mat-content {
   margin: 4em auto !important;
   width: 92%;
   padding: 1em;
@@ -31,19 +32,19 @@ p.intro {
   margin: 0em 1em !important;
 }
 
-md-card {
+mat-card {
   margin: 16px 8px !important;
 }
 
-md-card md-card-title {
+mat-card mat-card-title {
   padding: 8px 12px;
 }
 
-md-toolbar.card-title {
+mat-toolbar.card-title {
   min-height: 32px;
 }
 
-md-toolbar.dark {
+mat-toolbar.dark {
   position:fixed !important;
   background-color: rgb(1,74,182);
   /*background-color: #222 !important;*/
@@ -58,7 +59,7 @@ md-toolbar.dark {
   padding: 1em 2em;
 }
 
-.md-angular-icon > i {
+.mat-angular-icon > i {
   background-image: url("../assets/ng.png");
   background-repeat: no-repeat;
   background-position: center center;
@@ -77,23 +78,23 @@ md-toolbar.dark {
   width: 36px;
 }
 
-md-toolbar h1 {
+mat-toolbar h1 {
   margin: auto;
 }
 
 /* Sidenav area */
 
-md-list .md-button {
+mat-list .mat-button {
   color: inherit;
   font-weight: 500;
   text-align: left;
   width: 100%;
 }
-  md-list .md-button.selected {
+  mat-list .mat-button.selected {
     color: #03a9f4;
   }
 
-  md-sidenav  md-list {
+  mat-sidenav  mat-list {
     padding: 0px 0px 8px 0px;
   }
 
@@ -110,7 +111,7 @@ md-list .md-button {
   padding-top: 5px;
 }
 
-#content .md-button.contact {
+#content .mat-button.contact {
   background-color: transparent;
   border: none;
   width: 48px;
@@ -121,23 +122,23 @@ md-list .md-button {
   right: 40px;
 }
 
-#content md-icon.avatar {
+#content mat-icon.avatar {
   margin-top: 10px;
 }
 
-#content .md-button.contact > md-icon {
+#content .mat-button.contact > mat-icon {
   fill:black;
   width:36px;
   height:36px;
 }
 
-md-button.menuBtn > md-icon {
+mat-button.menuBtn > mat-icon {
   fill:white;
   width:24px;
   height:24px;
 }
 
-#content .md-button.contact:active > md-icon {
+#content .mat-button.contact:active > mat-icon {
   background-color: #dadada;
   border-radius: 75%;
   padding:4px;
@@ -158,7 +159,7 @@ md-button.menuBtn > md-icon {
 
 /* Typography support coming in 0.8.0 */
 
-md-toolbar h1 {
+mat-toolbar h1 {
   font-size: 1.250em;
   font-weight: 400;
 }
@@ -179,7 +180,7 @@ md-toolbar h1 {
   -moz-transform:scale(0.70);
 }
 
-md-bottom-sheet  md-icon {
+mat-bottom-sheet  mat-icon {
   margin-right:20px;
 }
 
@@ -189,7 +190,7 @@ span.name {
   padding-left:5px;
 }
 
-md-toolbar.dark.dark-bottom {
+mat-toolbar.dark.dark-bottom {
   bottom: 0;
   top: inherit;
 }

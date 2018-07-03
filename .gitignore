@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-# /dist # we need this since we run this code
+/dist
 /tmp
 /out-tsc
 
@@ -30,21 +30,10 @@
 /coverage
 /libpeerconnection.log
 npm-debug.log
+yarn-error.log
 testem.log
 /typings
-
-# e2e
-/e2e/*.js
-/e2e/*.map
 
 # System Files
 .DS_Store
 Thumbs.db
-
-# pluralsight course ignores
-**/*.map
-_examples/storyline-tracker/app/**/*.js
-_examples/**/app/**/*.js
-_examples/**/api/**/*.js
-_examples/**/in-memory-backend/**/*.js
-plnkr.html
