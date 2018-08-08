@@ -1,171 +1,228 @@
 import { Injectable } from '@angular/core';
-
 import { Card } from '../models/card';
 
 @Injectable()
 export class ExampleService {
   cacheBuster = '?bust=' + Date.now();
 
-  demoFile = 'eplnkr.html' + this.cacheBuster;
+  angularjsDemoFile = 'eplnkr.html' + this.cacheBuster;
+
+  angularDemoRepo =
+    'https://stackblitz.com/github/johnpapa/angular-first-look-examples';
+  angularDemoBranch = '/tree/cli';
+  angularDemoLinkPrefix = `${this.angularDemoRepo}${this.angularDemoBranch}`;
 
   cards = [
     new Card(
       0,
       'Angular Storyline Tracker',
-      `storyline-tracker/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/storyline-tracker${
+        this.cacheBuster
+      }`,
       `Example of all of the concepts put together in an application.`
     ),
     new Card(
       1,
       'AngularJS (v1) to Angular (v2+): AngularJS Controller',
-      `compare/angularjs/controller/${this.demoFile}`,
+      `assets/live-examples/compare/angularjs/controller/${
+        this.angularjsDemoFile
+      }`,
       `Simple example of an AngularJS Controller.`
     ),
     new Card(
       2,
       'AngularJS (v1) to Angular (v2+): Angular Component',
-      `compare/angular/component/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/compare/angular/component${
+        this.cacheBuster
+      }`,
       `Simple example of an Angular Component.`
     ),
     new Card(
       3,
       'AngularJS (v1) to Angular (v2+): AngularJS Structural Directives',
-      `compare/angularjs/structural-directives/${this.demoFile}`,
+      `assets/live-examples/compare/angularjs/structural-directives/${
+        this.angularjsDemoFile
+      }`,
       `Simple example of an AngularJS Structural Directive.`
     ),
     new Card(
       4,
       'AngularJS (v1) to Angular (v2+): Angular Structural Directives',
-      `compare/angular/structural-directives/${this.demoFile}`,
+      `${
+        this.angularDemoLinkPrefix
+      }/projects/compare/angular/structural-directives${this.cacheBuster}`,
       `Simple example of an Angular Structural Directive.`
     ),
     new Card(
       5,
       'AngularJS (v1) to Angular (v2+): AngularJS Two-Way Data Binding',
-      `compare/angularjs/2-way/${this.demoFile}`,
+      `assets/live-examples/compare/angularjs/2-way/${this.angularjsDemoFile}`,
       `Simple example of AngularJS Two-Way Data Binding.`
     ),
     new Card(
       6,
       'AngularJS (v1) to Angular (v2+): Angular Two-Way Data Binding',
-      `compare/angular/2-way/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/compare/angular/two-way${
+        this.cacheBuster
+      }`,
       `Simple example of Angular Two-Way Data Binding.`
     ),
     new Card(
       7,
       'AngularJS (v1) to Angular (v2+): AngularJS Property Binding',
-      `compare/angularjs/property-binding/${this.demoFile}`,
+      `assets/live-examples/compare/angularjs/property-binding/${
+        this.angularjsDemoFile
+      }`,
       `Simple example of AngularJS Property Binding.`
     ),
     new Card(
       8,
       'AngularJS (v1) to Angular (v2+): Angular Property Binding',
-      `compare/angular/property-binding/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/compare/angular/property-binding${
+        this.cacheBuster
+      }`,
       `Simple example of Angular Property Binding.`
     ),
     new Card(
       9,
       'AngularJS (v1) to Angular (v2+): AngularJS Event Binding',
-      `compare/angularjs/binding-events/${this.demoFile}`,
+      `assets/live-examples/compare/angularjs/binding-events/${
+        this.angularjsDemoFile
+      }`,
       `Simple example of AngularJS Event Binding.`
     ),
-    new Card(10,
+    new Card(
+      10,
       'AngularJS (v1) to Angular (v2+): Angular Event Binding',
-      `compare/angular/binding-events/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/compare/angular/binding-events${
+        this.cacheBuster
+      }`,
       `Simple example of Angular Event Binding.`
     ),
-    new Card(11,
+    new Card(
+      11,
       'AngularJS (v1) to Angular (v2+): AngularJS Services and DI',
-      `compare/angularjs/services/${this.demoFile}`,
+      `assets/live-examples/compare/angularjs/services/${
+        this.angularjsDemoFile
+      }`,
       `Simple example of AngularJS Services and DI.`
     ),
-    new Card(12,
+    new Card(
+      12,
       'AngularJS (v1) to Angular (v2+): Angular Services and DI',
-      `compare/angular/services/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/compare/angular/services${
+        this.cacheBuster
+      }`,
       `Simple example of Angular Services and DI.`
     ),
-    new Card(13,
+    new Card(
+      13,
       'Angular: Components',
-      `component-simple/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/component-simple${
+        this.cacheBuster
+      }`,
       `A Component contains application logic that controls a region of the user interface
       that we call a view.`
     ),
-    new Card(14,
+    new Card(
+      14,
       'Angular: Nested Components',
-      `component-nest/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/component-nest/${
+        this.cacheBuster
+      }`,
       `A Component may contain other components.`
     ),
-    new Card(15,
+    new Card(
+      15,
       'Angular: Input/Output Components',
-      `component-input-output/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/component-input-output/${
+        this.cacheBuster
+      }`,
       `A Component may have input properties and output events.`
     ),
-    new Card(16,
+    new Card(
+      16,
       'Angular: Data Binding and Directives',
-      `data-binding/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/data-binding/${this.cacheBuster}`,
       `Interpolation, Property Binding, Event Binding, Two Way Binding, and built-in Directives.`
     ),
-    new Card(17,
+    new Card(
+      17,
       'Angular: Need Services',
-      `need-services/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/need-services/${
+        this.cacheBuster
+      }`,
       `A Service provides anything our application needs. It often shares data or functions
       between other Angular features`
     ),
-    new Card(18,
+    new Card(
+      18,
       'Angular: Services and Dependency Injection',
-      `services-and-di/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/services-and-di/${
+        this.cacheBuster
+      }`,
       `Dependency Injection is how we provide an instance of a class to another Angular feature.`
     ),
-    new Card(19,
+    new Card(
+      19,
       'Angular: Component Lifecycle Hooks',
-      `lifecycle/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/lifecycle/${this.cacheBuster}`,
       `Lifecycle Hooks allow us to tap into specific moments in the application lifecycle to perform logic.`
     ),
-    new Card(20,
+    new Card(
+      20,
       'Angular: Needs Http',
-      `need-http/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/need-http/${this.cacheBuster}`,
       `Angular applications can connect with a web server to get or save data using HTTP.
       This example lacks http, whereas the next example has it.`
     ),
-    new Card(21,
+    new Card(
+      21,
       'Angular: Http',
-      `http/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/http/${this.cacheBuster}`,
       `Angular applications can connect with a web server to get or save data using HTTP.`
     ),
-    new Card(22,
+    new Card(
+      22,
       'Angular: Http with Async Pipe',
-      `http-async/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/http-async/${this.cacheBuster}`,
       `Using Http with Observables and the Async Pipe.`
     ),
-    new Card(23,
+    new Card(
+      23,
       'Angular: Http with Promises',
-      `http-promise/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/http-promise/${this.cacheBuster}`,
       `Using Http with promises.`
     ),
-    new Card(24,
+    new Card(
+      24,
       'Angular: Needs Router',
-      `need-router/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/need-router/${this.cacheBuster}`,
       `Use this sample to practice adding a router to navigate to components.`
     ),
-    new Card(25,
+    new Card(
+      25,
       'Angular: Router',
-      `router/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/router/${this.cacheBuster}`,
       `Routing allows our application to navigate between different Components, passing
       parameters where needed.`
     ),
-    new Card(26,
+    new Card(
+      26,
       'Angular: Route Guards',
-      `router-guard/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/router-guard/${this.cacheBuster}`,
       `Guard routes with logic to prevent access.`
     ),
-    new Card(27,
+    new Card(
+      27,
       'Angular: Eagerly Loading Routes',
-      `router-eager/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/router-eager/${this.cacheBuster}`,
       `Eagerly load routes.`
     ),
-    new Card(28,
+    new Card(
+      28,
       'Angular: Lazily Load Routes',
-      `router-lazy/${this.demoFile}`,
+      `${this.angularDemoLinkPrefix}/projects/router-lazy/${this.cacheBuster}`,
       `Lazily load routes.`
     )
   ];

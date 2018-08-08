@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-
+import { Component, Input, OnInit } from '@angular/core';
 import { Card } from '../models/card';
 
 @Component({
@@ -10,5 +9,5 @@ import { Card } from '../models/card';
 export class ExampleLinkComponent implements OnInit {
   @Input() card: Card;
 
-  ngOnInit() { }
+  ngOnInit() {}
 }

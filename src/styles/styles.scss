@@ -1,195 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
-/*@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';*/
+@import 'mixin';
 
-html, body {
+html,
+body {
   font-family: 'Roboto', sans-serif;
-  font-size:14px;
-  height:100%;
+  font-size: 14px;
+  height: 100%;
   margin: 0px;
   padding: 0px;
 }
 
-/*Custom Styles*/
-
-md-toolbar a {
-  color: inherit !important;
-  text-decoration: none;
-}
-
-.headline {
-  font-size: 16px;
-  line-height: 18px;
-}
-
-md-content {
-  margin: 4em auto !important;
-  width: 92%;
-  padding: 1em;
-}
-
 p.intro {
-  margin: 0em 1em !important;
-}
-
-md-card {
-  margin: 16px 8px !important;
-}
-
-md-card md-card-title {
-  padding: 8px 12px;
-}
-
-md-toolbar.card-title {
-  min-height: 32px;
-}
-
-md-toolbar.dark {
-  position:fixed !important;
-  background-color: rgb(1,74,182);
-  /*background-color: #222 !important;*/
-  top: 0;
-  z-index: 99999;
+  margin: 1em 0em 0em 1em !important;
 }
 
 .ps-title-icon i {
-  background-image: url("../assets/ps-icon.png");
+  background-image: url('../assets/ps-icon.png');
   background-repeat: no-repeat;
   background-position: center center;
   padding: 1em 2em;
-}
-
-.md-angular-icon > i {
-  background-image: url("../assets/ng.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  padding: 1em 2em;
-}
-/*End Custom Styles*/
-
-
-/* Toolbar area */
-
-.menu {
-  background-color: transparent;
-  border: none;
-  height: 38px;
-  margin: 16px;
-  width: 36px;
-}
-
-md-toolbar h1 {
-  margin: auto;
-}
-
-/* Sidenav area */
-
-md-list .md-button {
-  color: inherit;
-  font-weight: 500;
-  text-align: left;
-  width: 100%;
-}
-  md-list .md-button.selected {
-    color: #03a9f4;
-  }
-
-  md-sidenav  md-list {
-    padding: 0px 0px 8px 0px;
-  }
-
-
-/* Primary content area */
-
-#content {
-  overflow: hidden;
-}
-
-#content  {
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-top: 5px;
-}
-
-#content .md-button.contact {
-  background-color: transparent;
-  border: none;
-  width: 48px;
-  height: 48px;
-  margin: 8px auto 16px 0;
-  position: absolute;
-  top: 10px;
-  right: 40px;
-}
-
-#content md-icon.avatar {
-  margin-top: 10px;
-}
-
-#content .md-button.contact > md-icon {
-  fill:black;
-  width:36px;
-  height:36px;
-}
-
-md-button.menuBtn > md-icon {
-  fill:white;
-  width:24px;
-  height:24px;
-}
-
-#content .md-button.contact:active > md-icon {
-  background-color: #dadada;
-  border-radius: 75%;
-  padding:4px;
-  transition: all 100ms ease-out 30ms;
-}
-
-#content img {
-  display: block;
-  height: auto;
-  max-width: 500px;
-}
-
-/* Utils */
-
-.content-wrapper {
-  position: relative;
-}
-
-/* Typography support coming in 0.8.0 */
-
-md-toolbar h1 {
-  font-size: 1.250em;
-  font-weight: 400;
-}
-
-.avatar {
-  position: relative;
-  width: 128px;
-  height: 128px;
-  border: 1px solid #ddd;
-  border-radius: 50%;
-  display: inline-block;
-  overflow: hidden;
-  margin: 0px;
-  vertical-align: middle;
-  zoom:0.70;
-  transform: translateZ(0);
-  -webkit-transform: scale(0.70);
-  -moz-transform:scale(0.70);
-}
-
-md-bottom-sheet  md-icon {
-  margin-right:20px;
-}
-
-span.name {
-  font-weight: bold;
-  font-size:1.1em;
-  padding-left:5px;
-}
-
-md-toolbar.dark.dark-bottom {
-  bottom: 0;
-  top: inherit;
 }

@@ -1,17 +1,34 @@
-@import 'mixins';
+@import 'mixin';
 
-.card-title {
-  padding:1em 1em 1em 0;
-}
-.card-header {
-  height: 3em;
-  margin: 1em -24px;
-}
+// .card-title {
+//   padding: 1em 1em 1em 0;
+// }
+// .card-header {
+//   height: 3em;
+//   margin: 1em -24px;
+// }
 
 .card-header {
   @include header-style;
 }
 
-md-card {
-  margin: 8px !important;
+// mat-card {
+//   margin: 8px !important;
+// }
+
+mat-card-actions.mat-card-actions {
+  margin-left: 2px;
 }
+
+mat-card-content.mat-card-content {
+  margin-top: 1em;
+}
+
+mat-card {
+  margin: 16px 8px !important;
+}
+
+mat-card mat-card-title {
+  padding: 10px 0 0 0;
+}
+

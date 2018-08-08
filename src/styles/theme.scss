@@ -1,5 +1,6 @@
-@import '~@angular/material/core/theming/all-theme';
-// Plus imports for other components in your app.
+// @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+/*@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';*/
+@import '~@angular/material/theming';
 
 // Include the base styles for Angular Material core. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -8,17 +9,17 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
-$primary:       mat-palette($mat-blue, 800);
-$accent:        mat-palette($mat-pink, A200, A100, A400);
+$primary: mat-palette($mat-blue, 800);
+$accent: mat-palette($mat-pink, A200, A100, A400);
 // $accent:        mat-palette($mat-blue-grey, A200, A100, A400);
-$warn:          mat-palette($mat-deep-orange);
-$light-theme:   mat-light-theme($primary, $accent, $warn);
+$warn: mat-palette($mat-deep-orange);
+$light-theme: mat-light-theme($primary, $accent, $warn);
 
-$dark-primary:  mat-palette($mat-pink, 700, 500, 900);
-$dark-accent:  mat-palette($mat-blue-grey, A200, A100, A400);
+$dark-primary: mat-palette($mat-pink, 700, 500, 900);
+$dark-accent: mat-palette($mat-blue-grey, A200, A100, A400);
 // $dark-accent:   mat-palette($mat-deep-orange);
-$dark-warn:     mat-palette($mat-deep-purple);
-$dark-theme:    mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+$dark-warn: mat-palette($mat-deep-purple);
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
