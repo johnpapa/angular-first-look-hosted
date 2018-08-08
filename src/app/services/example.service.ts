@@ -24,13 +24,15 @@ export class ExampleService {
     new Card(
       1,
       'AngularJS (v1) to Angular (v2+): AngularJS Controller',
-      `assets/live-examples/compare/angularjs/controller/${this.angularjsDemoFile}`,
+      `assets/live-examples/compare/angularjs/controller/${
+        this.angularjsDemoFile
+      }`,
       `Simple example of an AngularJS Controller.`
     ),
     new Card(
       2,
       'AngularJS (v1) to Angular (v2+): Angular Component',
-      `${this.angularDemoLinkPrefix}/compare/angular/component${
+      `${this.angularDemoLinkPrefix}/projects/compare/angular/component${
         this.cacheBuster
       }`,
       `Simple example of an Angular Component.`
@@ -38,15 +40,17 @@ export class ExampleService {
     new Card(
       3,
       'AngularJS (v1) to Angular (v2+): AngularJS Structural Directives',
-      `assets/live-examples/compare/angularjs/structural-directives/${this.angularjsDemoFile}`,
+      `assets/live-examples/compare/angularjs/structural-directives/${
+        this.angularjsDemoFile
+      }`,
       `Simple example of an AngularJS Structural Directive.`
     ),
     new Card(
       4,
       'AngularJS (v1) to Angular (v2+): Angular Structural Directives',
-      `${this.angularDemoLinkPrefix}/compare/angular/structural-directives${
-        this.cacheBuster
-      }`,
+      `${
+        this.angularDemoLinkPrefix
+      }/projects/compare/angular/structural-directives${this.cacheBuster}`,
       `Simple example of an Angular Structural Directive.`
     ),
     new Card(
@@ -58,7 +62,7 @@ export class ExampleService {
     new Card(
       6,
       'AngularJS (v1) to Angular (v2+): Angular Two-Way Data Binding',
-      `${this.angularDemoLinkPrefix}/compare/angular/two-way${
+      `${this.angularDemoLinkPrefix}/projects/compare/angular/two-way${
         this.cacheBuster
       }`,
       `Simple example of Angular Two-Way Data Binding.`
@@ -66,13 +70,15 @@ export class ExampleService {
     new Card(
       7,
       'AngularJS (v1) to Angular (v2+): AngularJS Property Binding',
-      `assets/live-examples/compare/angularjs/property-binding/${this.angularjsDemoFile}`,
+      `assets/live-examples/compare/angularjs/property-binding/${
+        this.angularjsDemoFile
+      }`,
       `Simple example of AngularJS Property Binding.`
     ),
     new Card(
       8,
       'AngularJS (v1) to Angular (v2+): Angular Property Binding',
-      `${this.angularDemoLinkPrefix}/compare/angular/property-binding${
+      `${this.angularDemoLinkPrefix}/projects/compare/angular/property-binding${
         this.cacheBuster
       }`,
       `Simple example of Angular Property Binding.`
@@ -80,13 +86,15 @@ export class ExampleService {
     new Card(
       9,
       'AngularJS (v1) to Angular (v2+): AngularJS Event Binding',
-      `assets/live-examples/compare/angularjs/binding-events/${this.angularjsDemoFile}`,
+      `assets/live-examples/compare/angularjs/binding-events/${
+        this.angularjsDemoFile
+      }`,
       `Simple example of AngularJS Event Binding.`
     ),
     new Card(
       10,
       'AngularJS (v1) to Angular (v2+): Angular Event Binding',
-      `${this.angularDemoLinkPrefix}/compare/angular/binding-events${
+      `${this.angularDemoLinkPrefix}/projects/compare/angular/binding-events${
         this.cacheBuster
       }`,
       `Simple example of Angular Event Binding.`
@@ -94,13 +102,15 @@ export class ExampleService {
     new Card(
       11,
       'AngularJS (v1) to Angular (v2+): AngularJS Services and DI',
-      `assets/live-examples/compare/angularjs/services/${this.angularjsDemoFile}`,
+      `assets/live-examples/compare/angularjs/services/${
+        this.angularjsDemoFile
+      }`,
       `Simple example of AngularJS Services and DI.`
     ),
     new Card(
       12,
       'AngularJS (v1) to Angular (v2+): Angular Services and DI',
-      `${this.angularDemoLinkPrefix}/compare/angular/services${
+      `${this.angularDemoLinkPrefix}/projects/compare/angular/services${
         this.cacheBuster
       }`,
       `Simple example of Angular Services and DI.`
@@ -108,14 +118,18 @@ export class ExampleService {
     new Card(
       13,
       'Angular: Components',
-      `${this.angularDemoLinkPrefix}/projects/component-simple${this.cacheBuster}`,
+      `${this.angularDemoLinkPrefix}/projects/component-simple${
+        this.cacheBuster
+      }`,
       `A Component contains application logic that controls a region of the user interface
       that we call a view.`
     ),
     new Card(
       14,
       'Angular: Nested Components',
-      `${this.angularDemoLinkPrefix}/projects/component-nest/${this.cacheBuster}`,
+      `${this.angularDemoLinkPrefix}/projects/component-nest/${
+        this.cacheBuster
+      }`,
       `A Component may contain other components.`
     ),
     new Card(
@@ -135,14 +149,18 @@ export class ExampleService {
     new Card(
       17,
       'Angular: Need Services',
-      `${this.angularDemoLinkPrefix}/projects/need-services/${this.cacheBuster}`,
+      `${this.angularDemoLinkPrefix}/projects/need-services/${
+        this.cacheBuster
+      }`,
       `A Service provides anything our application needs. It often shares data or functions
       between other Angular features`
     ),
     new Card(
       18,
       'Angular: Services and Dependency Injection',
-      `${this.angularDemoLinkPrefix}/projects/services-and-di/${this.cacheBuster}`,
+      `${this.angularDemoLinkPrefix}/projects/services-and-di/${
+        this.cacheBuster
+      }`,
       `Dependency Injection is how we provide an instance of a class to another Angular feature.`
     ),
     new Card(
